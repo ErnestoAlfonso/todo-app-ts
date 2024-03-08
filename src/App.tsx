@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Todos } from "./components/Todos"
 import { FILTERS_VALUE, TodoTitle, type TodoId, type Todo as TodoType } from "./types"
 import { TODO_FILTERS } from "./consts"
@@ -33,6 +33,16 @@ const App = (): JSX.Element =>{
   const [todos, setTodos] = useState(false_todos)
 
   const [filterSelected, setFilterSelected] = useState<FILTERS_VALUE>(TODO_FILTERS.ALL)
+
+  useEffect(() =>{
+
+  })
+
+  async function populateList () {
+    const response = await fetch("http://")
+    const data = await response.json()
+    setTodos(data)
+  }
 
   const handleRemove = ({id}:TodoId)=>{
     const newTodos = todos.filter(todos=>todos.id !== id)
