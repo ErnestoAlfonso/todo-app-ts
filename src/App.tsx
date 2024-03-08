@@ -80,9 +80,9 @@ const App = (): JSX.Element =>{
     return todo
   })
 
-  const handleAddTodo = ({title}:TodoTitle): void =>{
+  const handleAddTodo = ({taskMessage}:TodoTitle): void =>{
     const newTodo = {
-      title,
+      taskMessage,
       id: crypto.randomUUID(),
       completed: false
     }
@@ -91,12 +91,12 @@ const App = (): JSX.Element =>{
     setTodos(newTodos)
   }
 
-  const handleUpdateTitle = ({ id, title }: Pick<TodoType, 'id' | 'title'>): void => {
+  const handleUpdateTitle = ({ id, taskMessage }: Pick<TodoType, 'id' | 'taskMessage'>): void => {
     const newTodos = todos.map(todo =>{
       if (todo.id === id) {
         return {
           ...todo,
-          title
+          taskMessage
         }
       }
 

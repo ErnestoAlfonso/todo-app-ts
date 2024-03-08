@@ -1,10 +1,10 @@
 export interface Todo {
     id:string
-    title:string
+    taskMessage:string
     completed:boolean
 }
 
-export type TodoTitle = Pick<Todo, 'title'>
+export type TodoTitle = Pick<Todo, 'taskMessage'>
 export type TodoId = Pick<Todo, 'id'>
 export type TodoCompleted = Pick<Todo, 'completed'>
 

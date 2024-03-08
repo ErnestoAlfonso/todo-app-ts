@@ -24,7 +24,7 @@ export const Todos: React.FC<Props> = ({todo, onRemoveTodo,onToggleCompletedTodo
                     <Todo
                     key={todo.id}
                     id = {todo.id}
-                    title={todo.title}
+                    taskMessage={todo.taskMessage}
                     completed={todo.completed}
                     onToggleCompletedTodo={onToggleCompletedTodo}
                     setTitle={setTitle}

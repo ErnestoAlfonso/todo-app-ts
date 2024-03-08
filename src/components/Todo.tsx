@@ -4,13 +4,13 @@ import { type TodoId, type Todo as TodoType } from "../types";
 interface Props extends TodoType{
     onToggleCompletedTodo: ({id,completed}:  Pick<TodoType, 'id' | 'completed'>) => void
     onRemoveTodo: ({id}:TodoId) => void
-    setTitle: (params: { id: string, title: string }) => void
+    setTitle: (params: { id: string, taskMessage: string }) => void
     isEditing: string
     setIsEditing: (completed: string) => void
 }
 
 
-export const Todo: React.FC<Props> = ({id,title,completed, onRemoveTodo,onToggleCompletedTodo,setTitle,isEditing, setIsEditing}) => {
+export const Todo: React.FC<Props> = ({id,taskMessage,completed, onRemoveTodo,onToggleCompletedTodo,setTitle,isEditing, setIsEditing}) => {
     const handleChangeCheckBox = (event: React.ChangeEvent<HTMLInputElement>): void => {
         if (!completed) {
             onToggleCompletedTodo({
@@ -20,7 +20,7 @@ export const Todo: React.FC<Props> = ({id,title,completed, onRemoveTodo,onToggle
         }
     }
     
-    const [editedTitle, setEditedTitle] = useState(title)
+    const [editedTitle, setEditedTitle] = useState(taskMessage)
     const inputEditTitle = useRef<HTMLInputElement>(null)
 
     const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -28,8 +28,8 @@ export const Todo: React.FC<Props> = ({id,title,completed, onRemoveTodo,onToggle
             if (e.key === 'Enter') {
                 setEditedTitle(editedTitle.trim())
         
-                if (editedTitle !== title) {
-                    setTitle({ id, title: editedTitle })
+                if (editedTitle !== taskMessage) {
+                    setTitle({ id, taskMessage: editedTitle })
                 }
         
                 if (editedTitle === '') onRemoveTodo({id})
@@ -38,7 +38,7 @@ export const Todo: React.FC<Props> = ({id,title,completed, onRemoveTodo,onToggle
             }
             
             if (e.key === 'Escape') {
-                setEditedTitle(title)
+                setEditedTitle(taskMessage)
                 setIsEditing('')
             }
         }
@@ -58,7 +58,7 @@ export const Todo: React.FC<Props> = ({id,title,completed, onRemoveTodo,onToggle
                     type="checkbox"
                     onChange={handleChangeCheckBox}
                     />
-                <label>{title}</label>
+                <label>{taskMessage}</label>
 
                 <button
                     className="destroy"
