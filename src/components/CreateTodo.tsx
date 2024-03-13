@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { type TodoTitle } from "../types"
 
 interface Props {
-    saveTodo : ({taskMessage}:TodoTitle) => void
+    saveTodo: ({ taskMessage }: TodoTitle) => void
 }
 
 
@@ -11,7 +11,7 @@ export const CreateTodo : React.FC<Props> = ({saveTodo}) => {
     
     const handleSubmit = (event: React.FormEvent<HTMLInputElement>): void => {
         event.preventDefault()
-        saveTodo({taskMessage: inputValue})
+        saveTodo({ taskMessage: inputValue})
         setInputValue('')
     }
     

@@ -1,1 +1,44 @@
 
+.view .span {
+    /* visibility: hidden; */
+    width: 50px;
+    /* background-color: black; */
+    /* color: #fff; */
+    text-align: center;
+    border-radius: 1px;
+    padding: 1px 0;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+    font-size: 11px;
+    display: block;
+}
+
+.view .span {
+    visibility: hidden;
+    width: 120px;
+    background-color: #c00016;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.view:hover .span {
+    visibility: visible;
+}
+
+.view .span {
+    top: -5px;
+    right: 105%;
+}
+
+@media screen and (max-width:1000px) {
+    .view .span {
+        display: none;
+    }
+}

@@ -2,7 +2,7 @@ import { type TodoTitle } from "../types"
 import { CreateTodo } from "./CreateTodo"
 
 interface Props {
-    onAddTodo : ({taskMessage}:TodoTitle) => void
+    onAddTodo : ({title}:TodoTitle) => void
 }
 
 

@@ -6,8 +6,8 @@ import { Todo } from "./Todo"
 interface Props{
     todo:ListOfTodos
     onToggleCompletedTodo: ({id,completed}:  Pick<TodoType, 'id' | 'completed'>) => void
-    onRemoveTodo: ({id}:TodoId) => void
-    setTitle: (params: Omit<TodoType, 'completed'>) => void
+    onRemoveTodo: ({ id }: TodoId) => void
+    setTitle: ({ id, taskMessage }: Pick<TodoType, 'id' | 'taskMessage'>) => void
 }
 export const Todos: React.FC<Props> = ({todo, onRemoveTodo,onToggleCompletedTodo,setTitle}) => {
 
@@ -25,9 +25,11 @@ export const Todos: React.FC<Props> = ({todo, onRemoveTodo,onToggleCompletedTodo
                     key={todo.id}
                     id = {todo.id}
                     taskMessage={todo.taskMessage}
-                    completed={todo.completed}
-                    onToggleCompletedTodo={onToggleCompletedTodo}
-                    setTitle={setTitle}
+                        completed={todo.completed}
+                        creationDateTime={todo.creationDateTime}
+                        finishDate={todo.finishDate }
+                        onToggleCompletedTodo={onToggleCompletedTodo}
+                        setTitle={setTitle}
                     onRemoveTodo={onRemoveTodo}
                     isEditing={isEditing}
                     setIsEditing={setIsEditing}

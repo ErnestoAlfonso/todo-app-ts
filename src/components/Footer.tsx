@@ -3,8 +3,7 @@ import { CreateTodo } from "./CreateTodo"
 import { Filters } from "./Filters"
 
 interface Props {
-    activeCount: number
-    completedCount: number
+    count: number
     filterSelected: FILTERS_VALUE
     onCreateTodo: () => void
     handleFilterChange: (filter: FILTERS_VALUE) => void
@@ -12,8 +11,7 @@ interface Props {
 
 
 export const Footer: React.FC<Props> = ({
-    activeCount=0,
-    completedCount = 0,
+    count = 0,
     filterSelected,
     handleFilterChange,
     onCreateTodo
@@ -21,7 +19,7 @@ export const Footer: React.FC<Props> = ({
         return (
             <footer className="footer">
                 <span className="todo-count">
-                    <strong>{activeCount + completedCount}</strong> Tasks
+                    <strong>{count}</strong> Tasks
                 </span>
 
                 <Filters

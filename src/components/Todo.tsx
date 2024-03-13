@@ -1,8 +1,10 @@
 import {useEffect, useRef, useState} from "react";
 import { type TodoId, type Todo as TodoType } from "../types";
 
+
+
 interface Props extends TodoType{
-    onToggleCompletedTodo: ({id,completed}:  Pick<TodoType, 'id' | 'completed'>) => void
+    onToggleCompletedTodo: ({id}:  Pick<TodoType, 'id'>) => void
     onRemoveTodo: ({id}:TodoId) => void
     setTitle: (params: { id: string, taskMessage: string }) => void
     isEditing: string
@@ -10,16 +12,20 @@ interface Props extends TodoType{
 }
 
 
-export const Todo: React.FC<Props> = ({id,taskMessage,completed, onRemoveTodo,onToggleCompletedTodo,setTitle,isEditing, setIsEditing}) => {
-    const handleChangeCheckBox = (event: React.ChangeEvent<HTMLInputElement>): void => {
+export const Todo: React.FC<Props> = ({ id, taskMessage, completed, creationDateTime, finishDate, onRemoveTodo, onToggleCompletedTodo, setTitle, isEditing, setIsEditing }) => {
+    const c = creationDateTime
+    const f = finishDate
+
+
+    async function handleChangeCheckBox()
+    {
         if (!completed) {
             onToggleCompletedTodo({
-                id,
-                completed: event.target.checked
+                id
             });
         }
     }
-    
+    const [isShown, setIsShown] = useState(false);
     const [editedTitle, setEditedTitle] = useState(taskMessage)
     const inputEditTitle = useRef<HTMLInputElement>(null)
 
@@ -32,7 +38,7 @@ export const Todo: React.FC<Props> = ({id,taskMessage,completed, onRemoveTodo,on
                     setTitle({ id, taskMessage: editedTitle })
                 }
         
-                if (editedTitle === '') onRemoveTodo({id})
+                
             
                 setIsEditing('')
             }
@@ -49,29 +55,50 @@ export const Todo: React.FC<Props> = ({id,taskMessage,completed, onRemoveTodo,on
         }, [isEditing])
 
 
-    return(
+    return (
         <>
-            <div className="view">
+            <div className="view" onMouseEnter={() => setIsShown(true)}
+                onMouseLeave={() => setIsShown(false)} >
                 <input
                     className="toggle"
                     checked={completed}
                     type="checkbox"
-                    onChange={handleChangeCheckBox}
-                    />
+                    onChange={() => {
+                        const confirmacion = window.confirm('¿Estás seguro de que quieres realizar esta acción?');
+                        if (confirmacion) {
+                             handleChangeCheckBox()
+                     
+                        }
+                    }}
+                />
                 <label>{taskMessage}</label>
 
                 <button
                     className="destroy"
-                    onClick={()=>{onRemoveTodo({id})}}
-                    />
+                    onClick={() => {
+                        const confirmacion = window.confirm('¿Estás seguro de que quieres realizar esta acción?');
+                        if (confirmacion) {
+                            // Acción confirmada
+                            onRemoveTodo({ id });
+                        }
+                    }}
+                />
+                {isShown && (
+                    <span className="span" >
+                        {c}
+                        <br />
+                        {f}
+                    </span>
+                )}
             </div>
+
             <input
-            className='edit'
-            value={editedTitle}
-            onChange={(e) => { setEditedTitle(e.target.value) }}
-            onKeyDown={handleKeyDown}
-            onBlur={() => { setIsEditing('') }}
-            ref={inputEditTitle}
+                className='edit'
+                value={editedTitle}
+                onChange={(e) => { setEditedTitle(e.target.value) }}
+                onKeyDown={handleKeyDown}
+                onBlur={() => { setIsEditing('') }}
+                ref={inputEditTitle}
             />
         </>
     )
