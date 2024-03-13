@@ -64,10 +64,10 @@ export const Todo: React.FC<Props> = ({ id, taskMessage, completed, creationDate
                     checked={completed}
                     type="checkbox"
                     onChange={() => {
-                        const confirmacion = window.confirm('¿Estás seguro de que quieres realizar esta acción?');
+                        const confirmacion = window.confirm('Â¿EstÃ¡s seguro de que quieres realizar esta acciÃ³n?');
                         if (confirmacion) {
-                             handleChangeCheckBox()
-                     
+                            handleChangeCheckBox()
+                    
                         }
                     }}
                 />
@@ -76,9 +76,9 @@ export const Todo: React.FC<Props> = ({ id, taskMessage, completed, creationDate
                 <button
                     className="destroy"
                     onClick={() => {
-                        const confirmacion = window.confirm('¿Estás seguro de que quieres realizar esta acción?');
+                        const confirmacion = window.confirm('Â¿EstÃ¡s seguro de que quieres realizar esta acciÃ³n?');
                         if (confirmacion) {
-                            // Acción confirmada
+                            // AcciÃ³n confirmada
                             onRemoveTodo({ id });
                         }
                     }}
